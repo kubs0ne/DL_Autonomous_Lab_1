@@ -3,16 +3,17 @@ import os
 import time
 import numpy as np
 np.random.seed(2020)
+import PIL
 
 import keras
 import tensorflow as tf
 from keras import applications
-from keras import optimizers
+from tensorflow.keras import optimizers
 from keras.models import Model
 from keras.layers import Dropout, Flatten, Dense, GlobalMaxPooling2D, BatchNormalization
 from keras import backend as k
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler, TensorBoard, EarlyStopping
-
+from keras.applications import densenet
 
 def load_mame(dataframe=False):
     """ Load MAMe dataset data
@@ -78,7 +79,7 @@ print('Using TensorFlow version', tf.__version__)
 img_width, img_height = 256, 256
 batch_size = 128
 epochs = 100
-preprocessing_func = applications.densenet.preprocess_input
+preprocessing_func = densenet.preprocess_input
 
 # Load dataset
 df_train, df_val, df_test = load_mame(dataframe=True)
@@ -89,7 +90,7 @@ print('Training examples: {}\n{}\n'.format(len(df_train), df_train.head()))
 print('Validation examples: {}\n{}\n'.format(len(df_val), df_val.head()))
 
 # Load pre-trained model
-base_model = applications.DenseNet121(weights="imagenet", include_top=False,
+base_model = densenet.DenseNet121(weights="imagenet", include_top=False,
                                       input_shape=(img_width, img_height, 3))  # pooling = max/avg
 
 # Freeze layers
