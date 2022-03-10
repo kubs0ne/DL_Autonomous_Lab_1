@@ -1,4 +1,3 @@
 
-ssh 
+scp Experiments/1 nct01029@dt01.bsc.es:/home/nct01/nct01029/AutoLab1/Exp1
 
-scp cifar-10-batches-py.tar.gz nct01029@dt01.bsc.es:/home/nct01/nct01029/.keras/datasets/
