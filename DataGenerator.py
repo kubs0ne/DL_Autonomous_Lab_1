@@ -1,17 +1,8 @@
 import pandas as pd
 import os
-import time
 import numpy as np
 np.random.seed(2020)
 
-import keras
-import tensorflow as tf
-from keras import applications
-from keras import optimizers
-from keras.models import Model
-from keras.layers import Dropout, Flatten, Dense, GlobalMaxPooling2D, BatchNormalization
-from keras import backend as k
-from keras.callbacks import ModelCheckpoint, LearningRateScheduler, TensorBoard, EarlyStopping
 
 def load_mame(dataframe=False):
     """ Load MAMe dataset data
@@ -24,10 +15,10 @@ def load_mame(dataframe=False):
       or
       df_train, df_val, df_test if dataframe=True
     """
-    INPUT_PATH = 'MAMe_metadata/'
+    INPUT_PATH = 'MAMe_metadata'
 
     # Load dataset table
-    dataset = pd.read_csv(os.path.join(INPUT_PATH, 'MAMe_dataset.csv'))
+    dataset = pd.read_csv(os.path.join(INPUT_PATH+os.sep, 'MAMe_dataset.csv'))
 
     # Subset divisions
     x_train_files = dataset.loc[dataset['Subset'] == 'train']['Image file'].tolist()
@@ -63,57 +54,3 @@ def load_mame(dataframe=False):
         return (np.array(x_train), np.array(y_train_class)), (np.array(x_val),
                                                               np.array(y_val_class)), (
                np.array(x_test), np.array(y_test_class))
-
-
-df_train, df_val, df_test = load_mame(dataframe=True)
-
-# Define some variables
-img_width, img_height = 256, 256
-batch_size = 128
-epochs = 100
-preprocessing_func = applications.densenet.preprocess_input
-
-# Load dataset
-df_train, df_val, df_test = load_mame(dataframe=True)
-num_classes = len(df_train['class'].unique())
-
-
-# Data generation and augmentation
-
-from keras.preprocessing.image import ImageDataGenerator
-
-# Initiate the train and test generators with data Augumentation
-train_datagen = ImageDataGenerator(
-        preprocessing_function = preprocessing_func,
-        rotation_range = 30,
-        zoom_range = 0.2,
-        width_shift_range = 0.2,
-        height_shift_range = 0.2,
-        shear_range = 0.2,        # TODO: increase shear - it is in degrees!
-        horizontal_flip = True,
-        fill_mode = "nearest")
-
-test_datagen = ImageDataGenerator(preprocessing_function = preprocessing_func)
-
-train_generator = train_datagen.flow_from_dataframe(
-        df_train,
-        target_size = (img_height, img_width),
-        batch_size = batch_size,
-        class_mode = "categorical",
-        validate_filenames=False)
-
-validation_generator = test_datagen.flow_from_dataframe(
-        df_val,
-        target_size = (img_height, img_width),
-        batch_size = batch_size,
-        shuffle = False,
-        class_mode = "categorical",
-        validate_filenames=False)
-
-test_generator = test_datagen.flow_from_dataframe(
-        df_test,
-        target_size = (img_height, img_width),
-        batch_size = 1,
-        shuffle = False,
-        class_mode = "categorical",
-        validate_filenames=False)
