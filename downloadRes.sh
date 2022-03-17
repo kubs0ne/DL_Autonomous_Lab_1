@@ -1,0 +1,1 @@
+scp -r nct01029@dt01.bsc.es:/home/nct01/nct01029/AutoLab1/Experiments/1/Results Experiments/1/Results  #Download the results directory
