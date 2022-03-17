@@ -26,10 +26,10 @@ def load_mame(dataframe=False):
       or
       df_train, df_val, df_test if dataframe=True
     """
-    INPUT_PATH = 'MAMe_metadata/'
+    INPUT_PATH = 'MAMe_metadata'
 
     # Load dataset table
-    dataset = pd.read_csv(os.path.join(INPUT_PATH, 'MAMe_dataset.csv'))
+    dataset = pd.read_csv(os.path.join(INPUT_PATH+os.sep, 'MAMe_dataset.csv'))
 
     # Subset divisions
     x_train_files = dataset.loc[dataset['Subset'] == 'train']['Image file'].tolist()
