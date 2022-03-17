@@ -6,8 +6,10 @@ currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfram
 parentdir = os.path.dirname(currentdir)
 parentparentdir = os.path.dirname(parentdir)
 sys.path.insert(0, parentparentdir)
-print(parentparentdir)
+# print(parentparentdir)
 
 import DataGenerator
 
-df_train, df_val, df_test = DataGenerator.load_mame(dataframe=True)
+df_train, df_val, df_test = DataGenerator.load_mame(parentparentdir,dataframe=True)
+
+print(df_train)

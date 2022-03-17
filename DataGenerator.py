@@ -4,7 +4,7 @@ import numpy as np
 np.random.seed(2020)
 
 
-def load_mame(dataframe=False):
+def load_mame(path, dataframe=False):
     """ Load MAMe dataset data
     Args:
       dataframe (bool): whether to return a dataframe or an array of
@@ -16,9 +16,9 @@ def load_mame(dataframe=False):
       df_train, df_val, df_test if dataframe=True
     """
     INPUT_PATH = 'MAMe_metadata'
-
+    print(os.path.join(path+os.sep,INPUT_PATH+os.sep, 'MAMe_dataset.csv'))
     # Load dataset table
-    dataset = pd.read_csv(os.path.join(INPUT_PATH+os.sep, 'MAMe_dataset.csv'))
+    dataset = pd.read_csv(os.path.join(path+os.sep,INPUT_PATH+os.sep, 'MAMe_dataset.csv'))
 
     # Subset divisions
     x_train_files = dataset.loc[dataset['Subset'] == 'train']['Image file'].tolist()
