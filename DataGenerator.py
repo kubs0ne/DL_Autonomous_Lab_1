@@ -54,4 +54,3 @@ def load_mame(path, dataframe=False):
         return (np.array(x_train), np.array(y_train_class)), (np.array(x_val),
                                                               np.array(y_val_class)), (
                np.array(x_test), np.array(y_test_class))
-#
