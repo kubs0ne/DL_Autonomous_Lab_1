@@ -19,7 +19,6 @@ epochs = 100
 
 train_generator, validation_generator, test_generator = DataGenerator.data_Gens(parentparentdir, img_height, img_width, batch_size)
 
-print(test_generator.classes)
 
 #Define the NN architecture
 from keras.models import Sequential
@@ -49,9 +48,9 @@ early = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbos
 
 history = model.fit_generator(
     generator=train_generator,
-    steps_per_epoch= 1, #STEP_SIZE_TRAIN,
+    steps_per_epoch= STEP_SIZE_TRAIN,
     validation_data=validation_generator,
-    validation_steps= 1, #STEP_SIZE_VAL,
+    validation_steps= STEP_SIZE_VAL,
     epochs=1
 )
 
