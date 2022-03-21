@@ -85,9 +85,9 @@ early = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbos
 
 history = model.fit_generator(
     generator=train_generator,
-    steps_per_epoch=STEP_SIZE_TRAIN,
+    steps_per_epoch=1,
     validation_data=validation_generator,
-    validation_steps=STEP_SIZE_VAL,
+    validation_steps=1,
     epochs=1
 )
 
