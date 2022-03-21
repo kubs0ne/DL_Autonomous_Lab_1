@@ -39,7 +39,7 @@ def evaluate_model(model, history, eval_gen ):
     sns.heatmap(cf_matrix, annot=True, cmap='PuRd', cbar=False, square=True, xticklabels=target_names,
                 yticklabels=target_names)
     plt.show()
-    plt.savefig('Results/ex1.pdf')
+    plt.savefig('ex1.pdf')
 
     ###########Added to the funciton
 
@@ -56,7 +56,7 @@ def evaluate_model(model, history, eval_gen ):
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
     plt.legend(['train','val'], loc='upper left')
-    plt.savefig('Results/mnist_fnn_accuracy.pdf')
+    plt.savefig('mnist_fnn_accuracy.pdf')
     plt.close()
     #Loss plot
     plt.plot(history.history['loss'])
@@ -65,6 +65,6 @@ def evaluate_model(model, history, eval_gen ):
     plt.ylabel('loss')
     plt.xlabel('epoch')
     plt.legend(['train','val'], loc='upper left')
-    plt.savefig('Results/mnist_fnn_loss.pdf')
+    plt.savefig('mnist_fnn_loss.pdf')
 
 
