@@ -3,7 +3,7 @@ import sys
 import inspect
 import time
 import tensorflow as tf
-from keras.preprocessing.image import ImageDataGenerator
+
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler, TensorBoard, EarlyStopping
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -12,48 +12,12 @@ sys.path.insert(0, parentparentdir)
 import DataGenerator
 import ModelEvaluator
 
-df_train, df_val, df_test = DataGenerator.load_mame(parentparentdir,dataframe=True)
 
 img_width, img_height = 256, 256
 batch_size = 128
 epochs = 100
-# Initiate the train and test generators with data Augumentation
-train_datagen = ImageDataGenerator(
-        # preprocessing_function = preprocessing_func,
-        rotation_range = 30,
-        zoom_range = 0.2,
-        width_shift_range = 0.2,
-        height_shift_range = 0.2,
-        shear_range = 0.2,        # TODO: increase shear - it is in degrees!
-        horizontal_flip = True,
-        fill_mode = "nearest")
 
-test_datagen = ImageDataGenerator(
-    # preprocessing_function = preprocessing_func
-    )
-
-train_generator = train_datagen.flow_from_dataframe(
-        df_train,
-        target_size = (img_height, img_width),
-        batch_size = batch_size,
-        class_mode = "categorical",
-        validate_filenames=False)
-
-validation_generator = test_datagen.flow_from_dataframe(
-        df_val,
-        target_size = (img_height, img_width),
-        batch_size = batch_size,
-        shuffle = False,
-        class_mode = "categorical",
-        validate_filenames=False)
-
-test_generator = test_datagen.flow_from_dataframe(
-        df_test,
-        target_size = (img_height, img_width),
-        batch_size = 1,
-        shuffle = False,
-        class_mode = "categorical",
-        validate_filenames=False)
+train_generator, validation_generator, test_generator = DataGenerator.data_Gens(parentparentdir, img_height, img_width, batch_size)
 
 print(test_generator.classes)
 
@@ -85,9 +49,9 @@ early = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbos
 
 history = model.fit_generator(
     generator=train_generator,
-    steps_per_epoch=STEP_SIZE_TRAIN,
+    steps_per_epoch= 1, #STEP_SIZE_TRAIN,
     validation_data=validation_generator,
-    validation_steps=STEP_SIZE_VAL,
+    validation_steps= 1, #STEP_SIZE_VAL,
     epochs=1
 )
 

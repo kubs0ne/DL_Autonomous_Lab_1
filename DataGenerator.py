@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 import numpy as np
+from keras.preprocessing.image import ImageDataGenerator
+
 np.random.seed(2020)
 
 
@@ -54,3 +56,46 @@ def load_mame(path, dataframe=False):
         return (np.array(x_train), np.array(y_train_class)), (np.array(x_val),
                                                               np.array(y_val_class)), (
                np.array(x_test), np.array(y_test_class))
+
+def data_Gens(path, img_height, img_width, batch_size):
+    df_train, df_val, df_test = load_mame(path,dataframe=True)
+    # Initiate the train and test generators with data Augumentation
+    train_datagen = ImageDataGenerator(
+            # preprocessing_function = preprocessing_func,
+            #rotation_range = 30,
+            #zoom_range = 0.2,
+            #width_shift_range = 0.2,
+            #height_shift_range = 0.2,
+            #shear_range = 0.2,        # TODO: increase shear - it is in degrees!
+            #horizontal_flip = True,
+            #fill_mode = "nearest"
+            )
+
+    test_datagen = ImageDataGenerator(
+        # preprocessing_function = preprocessing_func
+        )
+
+    train_generator = train_datagen.flow_from_dataframe(
+            df_train,
+            target_size = (img_height, img_width),
+            batch_size = batch_size,
+            class_mode = "categorical",
+            validate_filenames=False)
+
+    validation_generator = test_datagen.flow_from_dataframe(
+            df_val,
+            target_size = (img_height, img_width),
+            batch_size = batch_size,
+            shuffle = False,
+            class_mode = "categorical",
+            validate_filenames=False)
+
+    test_generator = test_datagen.flow_from_dataframe(
+            df_test,
+            target_size = (img_height, img_width),
+            batch_size = 1,
+            shuffle = False,
+            class_mode = "categorical",
+            validate_filenames=False)
+
+    return train_generator, validation_generator, test_generator
