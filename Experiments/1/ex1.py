@@ -51,9 +51,9 @@ history = model.fit_generator(
     steps_per_epoch= STEP_SIZE_TRAIN,
     validation_data=validation_generator,
     validation_steps= STEP_SIZE_VAL,
-    epochs=1
+    epochs=epochs
 )
 
 print('Model trained in {:.1f}min'.format((time.time() - t0) / 60))
 
-ModelEvaluator.evaluate_model(model,history,  validation_generator)
+ModelEvaluator.evaluate_model(model, history, validation_generator)
