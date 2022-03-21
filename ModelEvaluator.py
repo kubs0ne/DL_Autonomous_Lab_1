@@ -5,7 +5,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 import numpy as np
 
 
-def evaluate_model(model, history, eval_gen,):
+def evaluate_model(model, history, eval_gen ):
     """ Evaluate given model and print results.
     Show validation loss and accuracy, classification report and
     confusion matrix.
@@ -44,7 +44,7 @@ def evaluate_model(model, history, eval_gen,):
     ###########Added to the funciton
 
     #Evaluate the model with test set
-    score = model.evaluate(test_generator, verbose=0)
+    score = model.evaluate(eval_gen, verbose=0)
     print('test loss:', score[0])
     print('test accuracy:', score[1])
     ##Store Plots

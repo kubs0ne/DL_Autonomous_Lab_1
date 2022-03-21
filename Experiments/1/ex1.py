@@ -82,7 +82,7 @@ STEP_SIZE_VAL = validation_generator.n // validation_generator.batch_size
 
 early = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbose=1, mode='auto',
                       restore_best_weights=True)
-                      
+
 history = model.fit_generator(
     generator=train_generator,
     steps_per_epoch=STEP_SIZE_TRAIN,
@@ -94,74 +94,3 @@ history = model.fit_generator(
 print('Model trained in {:.1f}min'.format((time.time() - t0) / 60))
 
 ModelEvaluator.evaluate_model(model,history,  validation_generator)
-
-
-""" 
-#Evaluate the model with test set
-#score = model.evaluate(test_generator, verbose=0)
-#print('test loss:', score[0])
-#print('test accuracy:', score[1])
-
-##Store Plots
-#import matplotlib
-#matplotlib.use('Agg')
-#import matplotlib.pyplot as plt
-#Accuracy plot
-#plt.plot(history.history['accuracy'])
-#plt.plot(history.history['val_accuracy'])
-#plt.title('model accuracy')
-#plt.ylabel('accuracy')
-#plt.xlabel('epoch')
-#plt.legend(['train','val'], loc='upper left')
-#plt.savefig('Results/mnist_fnn_accuracy.pdf')
-#plt.close()
-#Loss plot
-#plt.plot(history.history['loss'])
-#plt.plot(history.history['val_loss'])
-#plt.title('model loss')
-#plt.ylabel('loss')
-#plt.xlabel('epoch')
-#plt.legend(['train','val'], loc='upper left')
-#plt.savefig('Results/mnist_fnn_loss.pdf')
-
-import seaborn as sns
-from sklearn.metrics import classification_report, confusion_matrix
-"""
-
-#def evaluate_model(model, eval_gen):
-    """ Evaluate given model and print results.
-    Show validation loss and accuracy, classification report and
-    confusion matrix.
-
-    Args:
-        model (model): model to evaluate
-        eval_gen (ImageDataGenerator): evaluation generator
-    """
-    # Evaluate the model
-    """
-    eval_gen.reset()
-    score = model.evaluate(eval_gen, verbose=0)
-    print('\nLoss:', score[0])
-    print('Accuracy:', score[1])
-    # Confusion Matrix (validation subset)
-    eval_gen.reset()
-    pred = model.predict(eval_gen, verbose=0)
-
-    # Assign most probable label
-    predicted_class_indices = np.argmax(pred, axis=1)
-
-    # Get class labels
-    labels = (eval_gen.class_indices)
-    target_names = labels.keys()
-
-   # Plot statistics
-    print(classification_report(eval_gen.classes, predicted_class_indices, target_names=target_names))
-
-    cf_matrix = confusion_matrix(np.array(eval_gen.classes), predicted_class_indices)
-    fig, ax = plt.subplots(figsize=(13, 13))
-    sns.heatmap(cf_matrix, annot=True, cmap='PuRd', cbar=False, square=True, xticklabels=target_names,
-                yticklabels=target_names)
-    plt.show()
-    plt.savefig('Results/ex1.pdf')
-
- """
