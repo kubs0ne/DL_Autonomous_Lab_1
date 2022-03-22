@@ -18,8 +18,8 @@ def evaluate_model(model, history, eval_gen ):
     # Evaluate the model
     eval_gen.reset()
     score = model.evaluate(eval_gen, verbose=0)
-    print('test loss:', score[0])
-    print('test accuracy:', score[1])
+    print('validation loss:', score[0])
+    print('validation accuracy:', score[1])
 
     # Confusion Matrix (validation subset)
     eval_gen.reset()
