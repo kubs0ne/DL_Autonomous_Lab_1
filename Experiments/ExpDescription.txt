@@ -1,0 +1,9 @@
+Experiments/
+1/ 4conv - 1dense - 1classifier
+2/ 3conv (maxPool, BatchNorm) - globalAVGpool - 1dense - 1classifier
+3/ 
+4/ 
+5/ VGG16
+6/ ResNet50
+7/ InceptionV3
+8/ DenseNet121
