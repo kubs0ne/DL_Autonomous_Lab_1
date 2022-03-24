@@ -25,10 +25,9 @@ train_generator, validation_generator, test_generator = DataGenerator.data_Gens(
 from keras.models import Sequential
 from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten, BatchNormalization, Dropout, GlobalAveragePooling2D
 #Two hidden layers
-model= tf.keras.applications.ResNet50(include_top=True,
-                   input_shape=(img_width,img_width,3),
-                   pooling=None,classes=29,
-                   weights=None, classifier_activation = 'softmax')
+model= tf.keras.applications.DenseNet121(include_top=True,
+                   input_shape=(img_width,img_width,3),classes=29,
+                   weights=None)
 model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accuracy'])
 model.summary()
 
