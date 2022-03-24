@@ -1,9 +1,38 @@
 Experiments/
 1/ 4conv - 1dense - 1classifier
-2/ 3conv (maxPool, BatchNorm) - globalAVGpool - 1dense - 1classifier
-3/ 
-4/ 
-5/ VGG16
-6/ ResNet50
-7/ InceptionV3
-8/ DenseNet121
+2/ 3conv (maxPool, BatchNorm) - globalAVGpool - 1dense - 1classifier Acc:0.57
+3/ Architecture from OR     Acc: 0.61
+4/ Architecture from OR without dropout: 0.65
+5/ VGG16  stable Training  Acc: 0.47 
+6/ ResNet50 Acc: 0.55
+7/ InceptionV3: Acc:0.69
+8/ DenseNet12: Acc: 0.70
+9/ OR without dropout with GeLu
+
+
+3-4-9
+OR-Architecture:
+conv2d (Conv2D)              
+activation (Activation)      
+batch_normalization (BatchNo 
+conv2d_1 (Conv2D)            
+activation_1 (Activation)    
+batch_normalization_1 (Batch 
+max_pooling2d (MaxPooling2D) 
+conv2d_2 (Conv2D)            
+activation_2 (Activation)    
+batch_normalization_2 (Batch)
+conv2d_3 (Conv2D)            
+activation_3 (Activation)    
+batch_normalization_3 (Batch 
+max_pooling2d_1 (MaxPooling2 
+conv2d_4 (Conv2D)            
+activation_4 (Activation)    
+batch_normalization_4 (Batch 
+conv2d_5 (Conv2D)            
+activation_5 (Activation)    
+batch_normalization_5 (Batch 
+max_pooling2d_2 (MaxPooling2 
+global_average_pooling2d (Gl 
+flatten (Flatten)            
+dense (Dense)                

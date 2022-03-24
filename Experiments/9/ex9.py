@@ -8,6 +8,7 @@ from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, Flatten
 from keras.layers import Dense, Activation, Flatten, Dropout, BatchNormalization, GlobalAveragePooling2D
 from keras.layers import Conv2D, MaxPooling2D
 from keras import regularizers
+from keras.activations import gelu
 
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler, TensorBoard, EarlyStopping
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -28,29 +29,29 @@ train_generator, validation_generator, test_generator = DataGenerator.data_Gens(
 weight_decay = 1e-4
 model = Sequential()
 model.add(Conv2D(32, (3,3), padding='same', kernel_regularizer=regularizers.l2(weight_decay), input_shape=(img_width, img_height, 3)))
-model.add(Activation('relu'))
+model.add(Activation(gelu))
 model.add(BatchNormalization())
 
 model.add(Conv2D(32, (3,3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
-model.add(Activation('relu'))
+model.add(Activation(gelu))
 model.add(BatchNormalization())
 model.add(MaxPooling2D(pool_size=(2,2)))
  
 model.add(Conv2D(64, (3,3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
-model.add(Activation('relu'))
+model.add(Activation(gelu))
 model.add(BatchNormalization())
 
 model.add(Conv2D(64, (3,3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
-model.add(Activation('relu'))
+model.add(Activation(gelu))
 model.add(BatchNormalization())
 model.add(MaxPooling2D(pool_size=(2,2)))
  
 model.add(Conv2D(128, (3,3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
-model.add(Activation('relu'))
+model.add(Activation(gelu))
 model.add(BatchNormalization())
 
 model.add(Conv2D(128, (3,3), padding='same', kernel_regularizer=regularizers.l2(weight_decay)))
-model.add(Activation('relu'))
+model.add(Activation(gelu))
 model.add(BatchNormalization())
 model.add(MaxPooling2D(pool_size=(2,2)))
 
@@ -84,3 +85,5 @@ history = model.fit_generator(
 print('Model trained in {:.1f}min'.format((time.time() - t0) / 60))
 
 ModelEvaluator.evaluate_model(model, history, validation_generator)
+
+model.save()
