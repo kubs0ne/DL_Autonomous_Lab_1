@@ -13,7 +13,7 @@ Experiments/
 12/ ORr w/o dropout with regularization two additional layers: 0.66
 13/ Kubanet w/o regularization GeLU and SGD:  0.69
 14/ Bernet 1.0
-15/
+15/ Kubanet 2.0 (modified architecture, bigger filters, more features)
 
 
 3-4-9
