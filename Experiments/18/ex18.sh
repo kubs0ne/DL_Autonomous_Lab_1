@@ -6,9 +6,9 @@
 
 #SBATCH --workdir=.
 
-#SBATCH --output=/home/nct01/nct01036/AutoLab1/Experiments/18/MAMeEx15_%j.out
+#SBATCH --output=/home/nct01/nct01036/AutoLab1/Experiments/18/MAMeEx18_%j.out
 
-#SBATCH --error=/home/nct01/nct01036/AutoLab1/Experiments/18/MAMeEx15_%j.err
+#SBATCH --error=/home/nct01/nct01036/AutoLab1/Experiments/18/MAMeEx18_%j.err
 
 #SBATCH --cpus-per-task=40
 

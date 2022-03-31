@@ -6,15 +6,6 @@ import numpy as np
 
 
 def evaluate_model(model, history, eval_gen ):
-    """ Evaluate given model and print results.
-    Show validation loss and accuracy, classification report and
-    confusion matrix.
-
-    Args:
-        model (model): model to evaluate
-
-        eval_gen (ImageDataGenerator): evaluation generator
-    """
     # Evaluate the model
     eval_gen.reset()
     score = model.evaluate(eval_gen, verbose=0)
