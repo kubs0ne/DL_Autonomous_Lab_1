@@ -86,11 +86,8 @@ model = Model(inputs = input, outputs = x)
 
 model.summary()
 
-opt = tf.keras.optimizers.SGD(
-    learning_rate=0.01, momentum=0.0, nesterov=False, name="SGD"
-)
 
-model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Train the model
 t0 = time.time()
