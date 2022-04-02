@@ -19,6 +19,7 @@ Experiments/
 18/ Kubanet with data augmentation:
 19/ Kubanet 3.0 (with additional conv layer): 0.73
 20/ Kubanet 3.0 with data augmentation:
+21/ Kubanet 3.0 with GeLu:
 
 3-4-9
 OR-Architecture:
