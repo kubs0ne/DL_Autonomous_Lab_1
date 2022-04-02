@@ -15,14 +15,14 @@ currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentfram
 parentdir = os.path.dirname(currentdir)
 parentparentdir = os.path.dirname(parentdir)
 sys.path.insert(0, parentparentdir)
-import DataGenerator
+import DataGeneratorAug
 import ModelEvaluator
 
 img_width, img_height = 256, 256
 batch_size = 64
 epochs = 60
 
-train_generator, validation_generator, test_generator = DataGenerator.data_Gens(parentparentdir, img_height, img_width,
+train_generator, validation_generator, test_generator = DataGeneratorAug.data_Gens(parentparentdir, img_height, img_width,
                                                                                 batch_size)
 
 # Define the NN architecture
@@ -68,9 +68,13 @@ c2 = Activation('relu')(c2)
 c2 = BatchNormalization()(c2)
 # c2 = MaxPooling2D(pool_size=(2, 2))(c2)
 
-x = Concatenate()([c1, c2])
+c1c2 = Concatenate()([c1, c2])
 
-x = GlobalAveragePooling2D()(x)
+d = (Conv2D(48, (3, 3), padding='same'))(c1c2)
+d = Activation('relu')(d)
+d = BatchNormalization()(d)
+
+x = GlobalAveragePooling2D()(d)
 x = Flatten()(x)
 
 x = Dense(29, activation=(tf.nn.softmax))(x)

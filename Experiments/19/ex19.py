@@ -68,9 +68,13 @@ c2 = Activation('relu')(c2)
 c2 = BatchNormalization()(c2)
 # c2 = MaxPooling2D(pool_size=(2, 2))(c2)
 
-x = Concatenate()([c1, c2])
+c1c2 = Concatenate()([c1, c2])
 
-x = GlobalAveragePooling2D()(x)
+d = (Conv2D(48, (3, 3), padding='same'))(c1c2)
+d = Activation('relu')(d)
+d = BatchNormalization()(d)
+
+x = GlobalAveragePooling2D()(d)
 x = Flatten()(x)
 
 x = Dense(29, activation=(tf.nn.softmax))(x)

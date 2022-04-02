@@ -7,19 +7,9 @@ np.random.seed(2020)
 
 
 def load_mame(path, dataframe=False):
-    """ Load MAMe dataset data
-    Args:
-      dataframe (bool): whether to return a dataframe or an array of
-                        filenames and a list of labels
-
-    Returns:
-      (x_train, y_train), (x_val, y_val), (x_test, y_test) if dataframe=False
-      or
-      df_train, df_val, df_test if dataframe=True
-    """
     INPUT_PATH = 'MAMe_metadata'
     print(os.path.join(path+os.sep,INPUT_PATH+os.sep, 'MAMe_dataset.csv'))
-    # Load dataset table
+    # Load dataset table with descriptions
     dataset = pd.read_csv(os.path.join(path+os.sep,INPUT_PATH+os.sep, 'MAMe_dataset.csv'))
 
     # Subset divisions
@@ -65,19 +55,9 @@ def data_Gens(path, img_height, img_width, batch_size):
         height_shift_range=0.1,
         horizontal_flip=True,
         width_shift_range=0.1
-            # preprocessing_function = preprocessing_func,
-            #rotation_range = 30,
-            #zoom_range = 0.2,
-            #width_shift_range = 0.2,
-            #height_shift_range = 0.2,
-            #shear_range = 0.2,        # TODO: increase shear - it is in degrees!
-            #horizontal_flip = True,
-            #fill_mode = "nearest"
-            )
-
-    test_datagen = ImageDataGenerator(
-        # preprocessing_function = preprocessing_func
         )
+
+    test_datagen = ImageDataGenerator()
 
     train_generator = train_datagen.flow_from_dataframe(
             df_train,
