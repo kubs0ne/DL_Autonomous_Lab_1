@@ -30,6 +30,14 @@ def evaluate_model(model, history, eval_gen ):
 
     print(classification_report(eval_gen.classes, predicted_class_indices, target_names=target_names))
 
+    
+
+    #Accuracy plot
+    acc_plot(history)
+    #Loss plot
+    loss_plot(history)
+
+def conf_matrix(c):
     cf_matrix = confusion_matrix(np.array(eval_gen.classes), predicted_class_indices)
     fig, ax = plt.subplots(figsize=(13, 13))
     sns.heatmap(cf_matrix, annot=True, cmap='PuRd', cbar=False, square=True, xticklabels=target_names,
@@ -38,11 +46,12 @@ def evaluate_model(model, history, eval_gen ):
     plt.savefig('confusion_matrix.pdf')
     plt.close()
 
+def clf_report():
+    with open('Classification_Report.txt', 'w') as f:
+        f.write('Create a new text file!')
 
-    ##Store Plots
+def acc_plot(history):
     matplotlib.use('Agg')
-
-    #Accuracy plot
     plt.plot(history.history['accuracy'])
     plt.plot(history.history['val_accuracy'])
     plt.title('model accuracy')
@@ -52,7 +61,7 @@ def evaluate_model(model, history, eval_gen ):
     plt.savefig('accuracy.pdf')
     plt.close()
 
-    #Loss plot
+def loss_plot(history):
     plt.plot(history.history['loss'])
     plt.plot(history.history['val_loss'])
     plt.title('model loss')
@@ -60,5 +69,3 @@ def evaluate_model(model, history, eval_gen ):
     plt.xlabel('epoch')
     plt.legend(['train','val'], loc='upper left')
     plt.savefig('loss.pdf')
-
-
