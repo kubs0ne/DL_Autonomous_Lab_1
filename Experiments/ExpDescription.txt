@@ -17,7 +17,7 @@ Experiments/
 16/ Kubanet with SGD + Nesterov: 0.64
 17/ Bernet 2.0 (reduced layers) with label smoothing: 0.56
 18/ Kubanet with data augmentation: 0.711
-19/ Kubanet 3.0 (with additional conv layer): 0.73
+19/ Kubanet 3.0 (with additional conv layer): 0.728
 20/ Kubanet 3.0 with data augmentation:
 21/ Kubanet 3.0 with GeLu:
 
