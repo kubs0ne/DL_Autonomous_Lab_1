@@ -21,7 +21,7 @@ import DataGenerator
 import ModelEvaluator
 
 img_width, img_height = 256, 256
-batch_size = 64
+batch_size = 32
 epochs = 60
 
 train_generator, validation_generator, test_generator = DataGenerator.data_Gens(parentparentdir, img_height, img_width,

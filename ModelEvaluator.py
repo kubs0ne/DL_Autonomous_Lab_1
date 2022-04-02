@@ -55,6 +55,7 @@ def evaluate_model(model, history, eval_gen ):
 def evaluate_test(model, eval_gen ):
     # Evaluate the model
     eval_gen.reset()
+    print('starting evaluation')
     score = model.evaluate(eval_gen, verbose=0)
     print('validation loss:', score[0])
     print('validation accuracy:', score[1])
