@@ -18,8 +18,9 @@ Experiments/
 17/ Bernet 2.0 (reduced layers) with label smoothing: 0.56
 18/ Kubanet with data augmentation: 0.711
 19/ Kubanet 3.0 (with additional conv layer): 0.728
-20/ Kubanet 3.0 with data augmentation:
-21/ Kubanet 3.0 with GeLu:
+20/ Kubanet 3.0 with data augmentation:0.694
+21/ Kubanet 3.0 with GeLu: 0.753
+22/ Kubanet 3.0 with GeLu and data augmentation:
 
 3-4-9
 OR-Architecture:

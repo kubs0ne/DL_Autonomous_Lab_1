@@ -26,7 +26,7 @@ def evaluate_model(model, history, eval_gen ):
     sns.heatmap(cf_matrix, annot=True, cmap='PuRd', cbar=False, square=True, xticklabels=target_names,
                 yticklabels=target_names)
     plt.show()
-    plt.savefig('confusion_matrix.pdf')
+    plt.savefig('confusion_matrix_val.pdf')
     plt.close()
 
 
@@ -74,6 +74,6 @@ def evaluate_test(model, eval_gen ):
     sns.heatmap(cf_matrix, annot=True, cmap='PuRd', cbar=False, square=True, xticklabels=target_names,
                 yticklabels=target_names)
     plt.show()
-    plt.savefig('confusion_matrix.pdf')
+    plt.savefig('confusion_matrix_val.pdf')
     plt.close()
 
