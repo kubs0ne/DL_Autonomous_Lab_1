@@ -78,6 +78,7 @@ x = Dense(29, activation=(tf.nn.softmax))(x)
 model = Model(inputs = input, outputs = x)
 
 model.summary()
+tf.keras.utils.plot_model(model)
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
@@ -89,14 +90,14 @@ STEP_SIZE_VAL = validation_generator.n // validation_generator.batch_size
 early = EarlyStopping(monitor='val_loss', min_delta=0.00001, patience=10, verbose=1, mode='auto',
                       restore_best_weights=True)
 
-history = model.fit_generator(
-    generator=train_generator,
-    steps_per_epoch=STEP_SIZE_TRAIN,
-    validation_data=validation_generator,
-    validation_steps=STEP_SIZE_VAL,
-    epochs=epochs
-)
-model.save('model')
+#history = model.fit_generator(
+#    generator=train_generator,
+#    steps_per_epoch=STEP_SIZE_TRAIN,
+#    validation_data=validation_generator,
+#    validation_steps=STEP_SIZE_VAL,
+#    epochs=epochs
+#)
+#model.save('model')
 print('Model trained in {:.1f}min'.format((time.time() - t0) / 60))
 
-ModelEvaluator.evaluate_model(model, history, validation_generator)
+#ModelEvaluator.evaluate_model(model, history, validation_generator)
